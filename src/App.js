@@ -30,17 +30,27 @@ import ProfileSettings from './pages/profileSettings'
 import ChangePassword from './pages/changePassword'
 import ForgotPassword from './pages/forgotPassword'
 import patientProfile from './pages/patientProfile'
-import {BrowserRouter, Routes, Route} from 'react-router-dom'
+import {BrowserRouter, Routes, Route, Navigate, useLocation} from 'react-router-dom'
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
+import AdminLayout from './components/AdminLayout' 
+import AdminDashboard from './pages/admin/AdminDashboard'
+import Specialities from './pages/admin/Specialities'
+import DoctorList from './pages/admin/DoctorList'
+import PatientList from './pages/admin/PatientList'
+import TransactionsList from './pages/admin/TransactionsList'
+import Appointment from './pages/admin/Appointment'
 
 
-function App() {
+
+function MainRoutes() {
+  const location = useLocation();
+  const isAdminRoute = location.pathname.startsWith('/admin');
+
   return (
     <div>
-      <Header />
-      <BrowserRouter>
-        <Routes>
+      {!isAdminRoute && <Header />}
+      <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/home" element={<Home />} />
           <Route path="/login" element={<Login />} />
@@ -74,11 +84,28 @@ function App() {
           <Route path="/ChangePassword" element={<ChangePassword />} />
           <Route path="/ForgotPassword" element={<ForgotPassword />} />
           <Route path="/Appointments" element={<Appointments />} />
+          <Route path="/admin/*" element={<AdminLayout />}>
+            <Route path="AdminDashboard" element={<AdminDashboard />} />
+            <Route path="specialities" element={<Specialities />} />
+            <Route path="DoctorList" element={<DoctorList />} />
+            <Route path="PatientList" element={<PatientList />} />
+            <Route path="TransactionsList" element={<TransactionsList />} />
+            <Route path="appointment" element={<Appointment />} />
+          </Route>
         </Routes>
-      </BrowserRouter>
-      <Footer />
-    </div>
+        {!isAdminRoute && <Footer />}
+      </div>
   )
+}
+
+
+
+function App() {
+  return (
+    <BrowserRouter>
+      <MainRoutes />
+    </BrowserRouter>
+  );
 }
 
 export default App

@@ -38,7 +38,7 @@ function Home() {
       <section className="section section-search">
         <div className="container-fluid">
           <div className="banner-wrapper">
-            <div className="banner-header text-center">
+            <div className="banner-header text-center pt-5">
               <h1>Tìm Bác Sĩ, Đặt Lịch Hẹn</h1>
               <p>Tìm kiếm những bác sĩ, phòng khám & bệnh viện tốt nhất gần bạn.</p>
             </div>

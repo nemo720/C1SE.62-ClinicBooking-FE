@@ -57,6 +57,9 @@ function Header() {
                   <li><a href="/changePassword">Đổi Mật Khẩu</a></li>
                 </ul>
               </li>
+              <li className="">
+                <a href="/admin">Admin</a>
+              </li>
             </ul>
           </div>
           <ul className="nav header-navbar-rht">
