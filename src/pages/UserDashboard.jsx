@@ -1,11 +1,12 @@
 import React from "react";
-import { DoctorSidebar } from "../components/Sidebar/DoctorSidebar";
 import { useGetDoctorAppointment } from "../hook/useGetDoctorAppointment";
+import { UserSidebar } from "../components/Sidebar/UserSidebar";
+import { useGetUserAppointment } from "../hook/useGetUserAppointment";
 import { useNavigate } from "react-router-dom";
 
-function DoctorDashboard() {
-  const { data } = useGetDoctorAppointment();
-  const navigate = useNavigate();
+function UserDashboard() {
+  const { data } = useGetUserAppointment();
+  const navigate = useNavigate()
   return (
     <div>
       {/* Breadcrumb */}
@@ -36,7 +37,7 @@ function DoctorDashboard() {
           <div className="row">
             <div className="col-md-5 col-lg-4 col-xl-3 theiaStickySidebar">
               {/* Profile Sidebar */}
-              <DoctorSidebar />
+              <UserSidebar />
               {/* /Profile Sidebar */}
             </div>
 
@@ -49,7 +50,7 @@ function DoctorDashboard() {
                       <table className="table table-hover table-center mb-0">
                         <thead>
                           <tr>
-                            <th>Tên Bệnh Nhân</th>
+                            <th>Tên Bác Sĩ</th>
                             <th>Ngày Hẹn</th>
                             <th>Bắt Đầu</th>
                             <th>Kết Thúc</th>
@@ -65,13 +66,13 @@ function DoctorDashboard() {
                                 style={{ cursor: "pointer" }}
                                 onClick={() => {
                                   navigate(
-                                    `/addPrescription?appointmentId=${e.appointmentId}`
+                                    `/viewPrescription?appointmentId=${e.appointmentId}`
                                   );
                                 }}
                               >
                                 <td>
                                   <h2 className="table-avatar">
-                                    {e.name}
+                                    {e.doctorName}
                                   </h2>
                                 </td>
                                 <td>{e.date}</td>
@@ -86,13 +87,26 @@ function DoctorDashboard() {
                                   </span>
                                 </td>
                                 <td>
-                                <span className="d-block text-info">
-                                    {e.status}
-                                  </span>
+                                  <div className="table-action">
+                                    {/* <a
+                                      href="javascript:void(0);"
+                                      className="btn btn-sm bg-info-light"
+                                    >
+                                      <i className="far fa-eye"></i> Xem
+                                    </a> */}
+                                    <a className="btn btn-sm bg-success-light">
+                                      {e.status}
+                                    </a>
+                                    {/* <a
+                                      href="javascript:void(0);"
+                                      className="btn btn-sm bg-danger-light"
+                                    >
+                                      <i className="fas fa-times"></i> Hủy
+                                    </a> */}
+                                  </div>
                                 </td>
                               </tr>
                             ))}
-                          {/* Add more rows as needed */}
                         </tbody>
                       </table>
                     </div>
@@ -186,4 +200,4 @@ function DoctorDashboard() {
   );
 }
 
-export default DoctorDashboard;
+export default UserDashboard;
